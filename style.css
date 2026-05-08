@@ -1,0 +1,745 @@
+/* ================================================
+   AA24 portfolio styles
+   carbon lime palette + outfit font
+   ================================================ */
+
+/* colors as variables so dark/light toggle is easy */
+:root {
+  --bg: #0f0f10;       /* main background */
+  --surface: #19191c;  /* cards / boxes */
+  --ink: #f5f5f3;      /* main text */
+  --muted: #a8a8a3;    /* secondary text */
+  --sub: #6a6a68;      /* even lighter text */
+  --lime: #c8ff3e;     /* accent color */
+  --line: rgba(255, 255, 255, 0.1);
+}
+
+/* light mode (toggled via JS by adding .light to body) */
+body.light {
+  --bg: #f4f4f1;
+  --surface: #ffffff;
+  --ink: #0f0f10;
+  --muted: #5a5a55;
+  --sub: #8a8a85;
+  --lime: #6a8a1a;
+  --line: rgba(0, 0, 0, 0.1);
+}
+
+
+/* basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  /* makes the theme toggle feel smooth */
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+  padding-bottom: 60px; /* space for footer */
+}
+
+
+/* helper class */
+.lime { color: var(--lime); }
+.dot { color: var(--lime); }
+
+
+/* ================================================
+   NAVBAR — floating pill at the top
+   ================================================ */
+.navbar {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  z-index: 100;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  /* smooth shrink on scroll */
+  transition: all 0.3s ease;
+}
+
+.logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 6px 14px 6px 16px;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+  list-style: none;
+}
+
+.nav-links a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 999px;
+  /* smooth hover */
+  transition: all 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.nav-links a.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* light/dark toggle button */
+.theme-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.3s;
+}
+.theme-btn:hover {
+  transform: rotate(180deg); /* fun spin on hover */
+}
+
+/* hamburger (only shows on mobile) */
+.hamburger {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: all 0.3s;
+}
+
+
+/* ================================================
+   HERO (home page)
+   ================================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  padding: 80px 24px 32px;
+  overflow: hidden;
+}
+
+/* placeholder background */
+.hero-bg {
+  position: absolute;
+  inset: 16px;
+  top: 80px;
+  border-radius: 16px;
+  /* striped pattern as a placeholder for video */
+  background:
+    linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+    repeating-linear-gradient(45deg, #19191c 0 10px, #2a2a2d 10px 11px);
+  overflow: hidden;
+}
+body.light .hero-bg {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.6)),
+    repeating-linear-gradient(45deg, #d8d8d3 0 10px, #c8c8c3 10px 11px);
+}
+
+.hero-bg-label {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--lime);
+}
+
+/* meta row over the hero */
+.hero-meta {
+  position: absolute;
+  top: 96px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  mix-blend-mode: difference;
+  z-index: 2;
+}
+
+/* the giant name */
+.hero-name {
+  position: absolute;
+  bottom: 60px;
+  left: 40px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: clamp(64px, 14vw, 200px);
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+  color: #fff;
+  mix-blend-mode: difference;
+  z-index: 2;
+}
+
+/* right side blurb */
+.hero-side {
+  position: absolute;
+  right: 40px;
+  bottom: 60px;
+  text-align: right;
+  max-width: 240px;
+  z-index: 2;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+
+.hero-side p {
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: var(--lime);
+  color: #0f0f10;
+  padding: 10px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  /* hover effect */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(200, 255, 62, 0.3);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #fff;
+  mix-blend-mode: difference;
+  text-transform: uppercase;
+  /* gentle bounce */
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 8px); }
+}
+
+
+/* ================================================
+   ABOUT TEASER (on home)
+   ================================================ */
+.teaser {
+  padding: 100px 40px;
+  border-top: 1px solid var(--line);
+}
+.teaser-inner { max-width: 1100px; margin: 0 auto; }
+
+.teaser-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.teaser-text {
+  font-size: clamp(28px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  margin: 18px 0 28px;
+  max-width: 900px;
+}
+.text-link {
+  display: inline-block;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 14px;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.text-link:hover {
+  color: var(--lime);
+  border-color: var(--lime);
+}
+
+
+/* ================================================
+   PAGE HEAD (about, gallery, contact)
+   ================================================ */
+.page-head {
+  padding: 140px 40px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.big-title {
+  font-size: clamp(48px, 9vw, 120px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-top: 14px;
+}
+.page-sub {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 480px;
+}
+
+
+/* ================================================
+   ABOUT page
+   ================================================ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 40px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.profile-pic {
+  background:
+    repeating-linear-gradient(45deg, var(--surface) 0 10px, var(--bg) 10px 11px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+}
+.ph-label {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-text { padding-top: 8px; }
+
+.lead {
+  font-size: 22px;
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+.about-text p {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 28px 0;
+}
+
+.quote {
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink);
+  /* a left bar */
+  border-left: 3px solid var(--lime);
+  padding-left: 16px;
+}
+
+
+/* skills marquee */
+.marquee {
+  margin: 18px 0 28px;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+  /* mask the edges so it fades out */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.marquee-track {
+  display: inline-flex;
+  gap: 18px;
+  white-space: nowrap;
+  animation: scroll 25s linear infinite;
+  font-family: 'Outfit', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+.marquee-track .sep {
+  color: var(--lime);
+}
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* numbered skill list */
+.skill-list {
+  list-style: none;
+  margin-top: 8px;
+}
+.skill-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 18px;
+  cursor: pointer;
+  transition: padding-left 0.2s, color 0.2s;
+}
+.skill-list li:hover {
+  padding-left: 12px;
+  color: var(--lime);
+}
+.skill-list .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+.skill-list .arr {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+
+/* ================================================
+   GALLERY (masonry / pinterest)
+   ================================================ */
+.masonry {
+  column-count: 3;
+  column-gap: 16px;
+  padding: 24px 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.m-item {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  /* hover effect */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.m-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.m-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+}
+.m-item:hover img {
+  transform: scale(1.05);
+}
+
+.m-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+
+
+/* ================================================
+   CONTACT page
+   ================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 60px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-form .field {
+  margin-bottom: 22px;
+}
+.contact-form label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--lime);
+}
+
+/* placeholder color */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--sub);
+}
+
+/* error message under each input */
+.err {
+  display: block;
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #ff6a6a;
+  min-height: 14px;
+}
+
+.submit {
+  margin-top: 12px;
+}
+
+.success-msg {
+  display: none;
+  margin-top: 16px;
+  color: var(--lime);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+.success-msg.show {
+  display: block;
+}
+
+
+/* contact sidebar */
+.contact-side {
+  padding-top: 8px;
+}
+.big-link {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  margin-top: 10px;
+  transition: opacity 0.2s;
+}
+.big-link:hover { opacity: 0.7; }
+
+.big-text {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.quote-side {
+  font-style: italic;
+  font-size: 16px;
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+
+/* ================================================
+   FOOTER
+   ================================================ */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 40px;
+  margin-top: 40px;
+}
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.footer-row a {
+  color: var(--lime);
+  text-decoration: none;
+}
+
+
+/* ================================================
+   FADE-IN ANIMATIONS (triggered by JS on scroll)
+   ================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ================================================
+   MOBILE / RESPONSIVE
+   ================================================ */
+@media (max-width: 760px) {
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar {
+    width: calc(100% - 24px);
+    border-radius: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* hide nav links until hamburger is clicked */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px 4px 4px;
+    gap: 0;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a {
+    width: 100%;
+    text-align: left;
+    padding: 12px 14px;
+  }
+
+  .theme-btn { margin-left: auto; }
+
+  .hero {
+    padding: 80px 14px 24px;
+  }
+  .hero-bg { inset: 8px; top: 78px; }
+  .hero-meta { left: 24px; right: 24px; top: 92px; font-size: 9px; }
+  .hero-name { left: 24px; bottom: 200px; }
+  .hero-side {
+    right: 24px;
+    bottom: 60px;
+    left: 24px;
+    text-align: left;
+    max-width: 100%;
+  }
+
+  .teaser { padding: 60px 24px; }
+  .page-head { padding: 120px 24px 30px; }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 24px;
+  }
+  .profile-pic { max-width: 320px; }
+
+  .masonry {
+    column-count: 2;
+    padding: 16px 16px 40px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 32px;
+  }
+
+  .footer-row {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .marquee-track { font-size: 22px; }
+}
+
+/* extra small */
+@media (max-width: 460px) {
+  .masonry { column-count: 1; }
+}

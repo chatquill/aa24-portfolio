@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="600" viewBox="0 0 480 600">
+  <rect width="480" height="600" fill="#19191c"/>
+  <!-- subtle grid pattern -->
+  <line x1="0" y1="80"  x2="80"  y2="0"   stroke="#222225" stroke-width="1"/>
+  <line x1="0" y1="160" x2="160" y2="0"   stroke="#222225" stroke-width="1"/>
+  <line x1="0" y1="240" x2="240" y2="0"   stroke="#222225" stroke-width="1"/>
+  <line x1="0" y1="320" x2="320" y2="0"   stroke="#222225" stroke-width="1"/>
+  <line x1="0" y1="400" x2="400" y2="0"   stroke="#222225" stroke-width="1"/>
+  <line x1="0" y1="480" x2="480" y2="0"   stroke="#222225" stroke-width="1"/>
+  <line x1="0" y1="560" x2="480" y2="80"  stroke="#222225" stroke-width="1"/>
+  <line x1="0" y1="600" x2="480" y2="120" stroke="#222225" stroke-width="1"/>
+  <line x1="80"  y1="600" x2="480" y2="200" stroke="#222225" stroke-width="1"/>
+  <line x1="160" y1="600" x2="480" y2="280" stroke="#222225" stroke-width="1"/>
+  <line x1="240" y1="600" x2="480" y2="360" stroke="#222225" stroke-width="1"/>
+  <line x1="320" y1="600" x2="480" y2="440" stroke="#222225" stroke-width="1"/>
+  <line x1="400" y1="600" x2="480" y2="520" stroke="#222225" stroke-width="1"/>
+  <!-- person silhouette -->
+  <circle cx="240" cy="210" r="70" fill="#2e2e32"/>
+  <ellipse cx="240" cy="430" rx="110" ry="90" fill="#2e2e32"/>
+  <!-- label -->
+  <rect x="80" y="490" width="320" height="70" rx="10" fill="#c8ff3e" opacity="0.9"/>
+  <text x="240" y="521" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#0f0f10" letter-spacing="3">PLACEHOLDER</text>
+  <text x="240" y="546" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#0f0f10">Replace with profile photo</text>
+</svg>

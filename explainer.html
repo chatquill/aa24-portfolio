@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Explainer — AA24</title>
+<style>
+  /* ---- page setup ---- */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Georgia, serif;
+    background: #f8f8f5;
+    color: #1a1a1a;
+    line-height: 1.7;
+    padding: 0 0 80px;
+  }
+
+  /* ---- hero banner ---- */
+  .banner {
+    background: #0f0f10;
+    color: #f5f5f3;
+    padding: 60px 48px 48px;
+    border-bottom: 4px solid #c8ff3e;
+  }
+  .banner-label {
+    font-family: monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c8ff3e;
+    margin-bottom: 16px;
+  }
+  .banner h1 {
+    font-size: clamp(32px, 6vw, 72px);
+    font-weight: normal;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .banner h1 span { color: #c8ff3e; }
+  .banner p {
+    margin-top: 18px;
+    color: #a8a8a3;
+    font-size: 17px;
+    max-width: 600px;
+    font-family: sans-serif;
+  }
+
+  /* ---- layout ---- */
+  .page-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---- how to view section ---- */
+  .how-to-view {
+    background: #c8ff3e;
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin: 48px 0 0;
+  }
+  .how-to-view h2 {
+    font-size: 26px;
+    font-weight: normal;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+  }
+  .steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .steps li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    font-family: sans-serif;
+    font-size: 15px;
+  }
+  .step-num {
+    background: #0f0f10;
+    color: #c8ff3e;
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: bold;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .how-to-view .note {
+    margin-top: 18px;
+    font-family: sans-serif;
+    font-size: 13px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+
+  /* ---- file map ---- */
+  .file-map {
+    margin: 48px 0 0;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .file-map-head {
+    background: #0f0f10;
+    color: #c8ff3e;
+    font-family: monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 24px;
+  }
+  .file-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #eee;
+  }
+  .file-row:last-child { border-bottom: none; }
+  .file-name {
+    background: #f0f0ed;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 16px 20px;
+    min-width: 180px;
+    border-right: 1px solid #ddd;
+    color: #0f0f10;
+  }
+  .file-desc {
+    padding: 16px 20px;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #444;
+    line-height: 1.5;
+  }
+  .file-desc strong { color: #0f0f10; }
+
+  /* ---- section headers ---- */
+  .chapter {
+    margin-top: 64px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #0f0f10;
+  }
+  .chapter-label {
+    font-family: monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 6px;
+  }
+  .chapter h2 {
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: normal;
+    letter-spacing: -0.02em;
+  }
+  .chapter h2 span { color: #c8ff3e; background: #0f0f10; padding: 0 6px; border-radius: 4px; }
+
+  /* ---- explanation blocks ---- */
+  .section-intro {
+    margin-top: 24px;
+    font-size: 16px;
+    color: #444;
+    font-family: sans-serif;
+    max-width: 700px;
+    line-height: 1.7;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+    color: #0f0f10;
+    padding-left: 12px;
+    border-left: 3px solid #c8ff3e;
+  }
+
+  p {
+    font-size: 15px;
+    color: #444;
+    margin-top: 10px;
+    font-family: sans-serif;
+    max-width: 720px;
+    line-height: 1.75;
+  }
+
+  code {
+    font-family: monospace;
+    font-size: 13px;
+    background: #efefeb;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #0f0f10;
+  }
+
+  pre {
+    background: #0f0f10;
+    color: #c8ff3e;
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin-top: 14px;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  pre .comment { color: #6a8a1a; }
+  pre .tag     { color: #7dd3fc; }
+  pre .attr    { color: #fca5a5; }
+  pre .val     { color: #86efac; }
+  pre .prop    { color: #fbbf24; }
+  pre .sel     { color: #c8ff3e; }
+
+  /* ---- concept boxes ---- */
+  .concept-box {
+    margin-top: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left: 4px solid #c8ff3e;
+    border-radius: 0 12px 12px 0;
+    padding: 18px 22px;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #333;
+    max-width: 720px;
+  }
+  .concept-box strong {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    margin-bottom: 6px;
+    font-family: monospace;
+  }
+
+  /* ---- three-language table ---- */
+  .lang-table {
+    width: 100%;
+    max-width: 720px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: sans-serif;
+    font-size: 14px;
+  }
+  .lang-table th {
+    background: #0f0f10;
+    color: #c8ff3e;
+    padding: 12px 16px;
+    text-align: left;
+    font-family: monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .lang-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  .lang-table tr:nth-child(even) td { background: #f8f8f5; }
+
+  /* ---- replace guide ---- */
+  .replace-guide {
+    margin-top: 48px;
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 16px;
+    padding: 28px 32px;
+    font-family: sans-serif;
+    font-size: 14px;
+    max-width: 720px;
+  }
+  .replace-guide h3 {
+    border-left: 3px solid #f59e0b;
+    margin-top: 0;
+    font-size: 18px;
+    color: #7c4a00;
+  }
+  .replace-guide ol {
+    margin-top: 14px;
+    padding-left: 20px;
+  }
+  .replace-guide ol li {
+    margin-bottom: 10px;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  /* ---- footer ---- */
+  .ex-footer {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid #ddd;
+    font-family: monospace;
+    font-size: 12px;
+    color: #aaa;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .banner { padding: 40px 24px 32px; }
+    .page-wrap { padding: 0 20px; }
+    .how-to-view { padding: 24px; }
+    .file-row { flex-direction: column; }
+    .file-name { min-width: unset; border-right: none; border-bottom: 1px solid #ddd; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== BANNER ====== -->
+<div class="banner">
+  <div class="banner-label">AA24 Portfolio · Site Documentation</div>
+  <h1>How This<br>Site <span>Works.</span></h1>
+  <p>A plain-English guide to every file in this project — written for someone who has never written code before.</p>
+</div>
+
+
+<div class="page-wrap">
+
+  <!-- ====== HOW TO VIEW ====== -->
+  <div class="how-to-view">
+    <h2>How to view the site in your browser</h2>
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div>Open <strong>File Explorer</strong> and navigate to the <code>Ataul Site</code> folder on your computer.</div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div><strong>Double-click</strong> the file called <code>index.html</code>. It will open automatically in your default web browser (Chrome, Edge, Firefox, etc.).</div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div>To navigate between pages, use the links in the nav bar just like a real website. Each page (<code>about.html</code>, <code>gallery.html</code>, <code>contact.html</code>) can also be opened directly by double-clicking it.</div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div>Every time you save a change to a file, go back to the browser and press <strong>F5</strong> (or <strong>Ctrl + R</strong>) to refresh and see the update.</div>
+      </li>
+    </ol>
+    <div class="note">
+      💡 <strong>No internet required.</strong> Because all the images and styles are now local files inside the project folder, the site works completely offline. The only things that need internet are the Google Fonts (the typography) and the Instagram link.
+    </div>
+  </div>
+
+
+  <!-- ====== FILE MAP ====== -->
+  <div class="chapter" style="margin-top:56px;">
+    <div class="chapter-label">Overview</div>
+    <h2>What each file <span>does</span></h2>
+  </div>
+
+  <div class="file-map">
+    <div class="file-map-head">Project Files</div>
+    <div class="file-row">
+      <div class="file-name">index.html</div>
+      <div class="file-desc"><strong>Home page.</strong> The first page visitors see. Contains the large hero with the name, a short teaser section, and the footer.</div>
+    </div>
+    <div class="file-row">
+      <div class="file-name">about.html</div>
+      <div class="file-desc"><strong>About page.</strong> Profile photo, bio text, the scrolling skills marquee strip, and the numbered skills list.</div>
+    </div>
+    <div class="file-row">
+      <div class="file-name">gallery.html</div>
+      <div class="file-desc"><strong>Work/Gallery page.</strong> A Pinterest-style grid of 9 images. Currently uses placeholder SVGs — swap them for real photos.</div>
+    </div>
+    <div class="file-row">
+      <div class="file-name">contact.html</div>
+      <div class="file-desc"><strong>Contact page.</strong> A message form with live validation, plus a sidebar with social links and a quote.</div>
+    </div>
+    <div class="file-row">
+      <div class="file-name">style.css</div>
+      <div class="file-desc"><strong>All the visual design.</strong> Colors, fonts, spacing, layout, animations, and responsive/mobile rules. One file controls the look of all 4 pages.</div>
+    </div>
+    <div class="file-row">
+      <div class="file-name">script.js</div>
+      <div class="file-desc"><strong>All the interactivity.</strong> Dark/light mode toggle, mobile hamburger menu, scroll fade-in animations, and contact form validation.</div>
+    </div>
+    <div class="file-row">
+      <div class="file-name">images/</div>
+      <div class="file-desc"><strong>Placeholder images folder.</strong> Contains SVG placeholder graphics for the gallery and profile photo. Replace these files with your real photos when ready.</div>
+    </div>
+  </div>
+
+
+  <!-- ====== THE THREE LANGUAGES ====== -->
+  <div class="chapter">
+    <div class="chapter-label">Core concept</div>
+    <h2>The three <span>languages</span></h2>
+  </div>
+
+  <p class="section-intro">
+    Every website is built from three languages working together. Think of building a magazine layout:
+  </p>
+
+  <table class="lang-table">
+    <tr>
+      <th>Language</th>
+      <th>Role</th>
+      <th>Design analogy</th>
+    </tr>
+    <tr>
+      <td><strong>HTML</strong></td>
+      <td>Structure &amp; content</td>
+      <td>The raw text and images placed on a page — no styling at all</td>
+    </tr>
+    <tr>
+      <td><strong>CSS</strong></td>
+      <td>Visual design</td>
+      <td>Font choices, colors, spacing, sizing — how everything looks</td>
+    </tr>
+    <tr>
+      <td><strong>JavaScript</strong></td>
+      <td>Interactive behavior</td>
+      <td>Buttons that respond, animations, things that change when you click or scroll</td>
+    </tr>
+  </table>
+
+  <div class="concept-box">
+    <strong>How they connect</strong>
+    Each HTML file links to <code>style.css</code> and <code>script.js</code> at the top and bottom of the file. That is why you only need one CSS and one JS file for the whole site — every page shares them.
+  </div>
+
+
+  <!-- ====== HTML SECTION ====== -->
+  <div class="chapter">
+    <div class="chapter-label">File 1 of 6</div>
+    <h2>Understanding <span>HTML</span></h2>
+  </div>
+
+  <p class="section-intro">HTML uses tags — labels wrapped in angle brackets — to describe what each piece of content is.</p>
+
+  <h3>How tags work</h3>
+  <p>Every tag has an opening version and a closing version (with a <code>/</code>). The content sits between them.</p>
+  <pre>&lt;<span class="tag">h1</span>&gt;Hello World&lt;/<span class="tag">h1</span>&gt;
+<span class="comment"><!-- h1 = Heading level 1, the biggest heading --></span></pre>
+
+  <p>Tags can also carry <strong>attributes</strong> — extra settings inside the opening tag:</p>
+  <pre>&lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"about.html"</span> <span class="attr">class</span>=<span class="val">"active"</span>&gt;About&lt;/<span class="tag">a</span>&gt;
+<span class="comment"><!-- href tells the link where to go
+     class is a label used by CSS and JS --></span></pre>
+
+  <h3>index.html — the Home page</h3>
+
+  <p><strong>The &lt;head&gt; section (invisible to visitors):</strong></p>
+  <pre>&lt;<span class="tag">meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span>&gt;
+<span class="comment"><!-- Allows any character: letters, symbols, emojis --></span>
+
+&lt;<span class="tag">meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span>&gt;
+<span class="comment"><!-- Makes the site scale properly on phones --></span>
+
+&lt;<span class="tag">title</span>&gt;AA24 — Ataul Awwal&lt;/<span class="tag">title</span>&gt;
+<span class="comment"><!-- The text that appears on the browser tab --></span>
+
+&lt;<span class="tag">link</span> <span class="attr">href</span>=<span class="val">"fonts.googleapis.com/..."</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span>&gt;
+<span class="comment"><!-- Loads the Outfit and JetBrains Mono fonts from Google --></span>
+
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"style.css"</span>&gt;
+<span class="comment"><!-- Connects the CSS design file to this page --></span></pre>
+
+  <p><strong>The Navbar:</strong></p>
+  <pre>&lt;<span class="tag">nav</span> <span class="attr">class</span>=<span class="val">"navbar"</span> <span class="attr">id</span>=<span class="val">"navbar"</span>&gt;
+  &lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"index.html"</span> <span class="attr">class</span>=<span class="val">"logo"</span>&gt;AA24&lt;/<span class="tag">a</span>&gt;
+  <span class="comment"><!-- The logo/brand name that links back to home --></span>
+
+  &lt;<span class="tag">ul</span> <span class="attr">class</span>=<span class="val">"nav-links"</span>&gt;
+    &lt;<span class="tag">li</span>&gt;&lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"index.html"</span> <span class="attr">class</span>=<span class="val">"active"</span>&gt;Home&lt;/<span class="tag">a</span>&gt;&lt;/<span class="tag">li</span>&gt;
+    <span class="comment"><!-- class="active" highlights this as the current page --></span>
+  &lt;/<span class="tag">ul</span>&gt;
+
+  &lt;<span class="tag">button</span> <span class="attr">class</span>=<span class="val">"theme-btn"</span> <span class="attr">id</span>=<span class="val">"themeBtn"</span>&gt;◐&lt;/<span class="tag">button</span>&gt;
+  <span class="comment"><!-- The half-circle ◐ is the dark/light toggle button --></span>
+
+  &lt;<span class="tag">button</span> <span class="attr">class</span>=<span class="val">"hamburger"</span> <span class="attr">id</span>=<span class="val">"hamburger"</span>&gt;
+    &lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt;
+  &lt;/<span class="tag">button</span>&gt;
+  <span class="comment"><!-- 3 empty spans = 3 lines = hamburger icon on mobile --></span>
+&lt;/<span class="tag">nav</span>&gt;</pre>
+
+  <p><strong>The Hero section:</strong></p>
+  <pre>&lt;<span class="tag">section</span> <span class="attr">class</span>=<span class="val">"hero"</span>&gt;
+
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"hero-bg"</span>&gt;
+    &lt;<span class="tag">span</span>&gt;● REC · REEL_2026.MP4&lt;/<span class="tag">span</span>&gt;
+    <span class="comment"><!-- Placeholder background panel. Replace with a real video or image. --></span>
+  &lt;/<span class="tag">div</span>&gt;
+
+  &lt;<span class="tag">h1</span> <span class="attr">class</span>=<span class="val">"hero-name fade-in"</span>&gt;
+    Ataul&lt;<span class="tag">br</span>&gt;Awwal&lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"dot"</span>&gt;.&lt;/<span class="tag">span</span>&gt;
+  &lt;/<span class="tag">h1</span>&gt;
+  <span class="comment"><!-- &lt;br&gt; forces a line break. class="dot" colors just the period lime green.
+       class="fade-in" makes this element animate in on scroll. --></span>
+
+  &lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"gallery.html"</span> <span class="attr">class</span>=<span class="val">"cta-btn"</span>&gt;View work →&lt;/<span class="tag">a</span>&gt;
+  <span class="comment"><!-- This looks like a button but is actually a link --></span>
+
+&lt;/<span class="tag">section</span>&gt;</pre>
+
+  <h3>about.html — the About page</h3>
+  <pre>&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"profile-pic"</span>&gt;
+  &lt;<span class="tag">img</span> <span class="attr">src</span>=<span class="val">"images/profile-photo.svg"</span> <span class="attr">alt</span>=<span class="val">"Ataul profile photo"</span>&gt;
+  <span class="comment"><!-- src= is the path to the image file.
+       alt= is a description for screen readers and if the image fails to load.
+       TO REPLACE: change src to your real photo, e.g. src="images/ataul.jpg" --></span>
+&lt;/<span class="tag">div</span>&gt;
+
+&lt;<span class="tag">blockquote</span> <span class="attr">class</span>=<span class="val">"quote"</span>&gt;"Love for all, hatred for none."&lt;/<span class="tag">blockquote</span>&gt;
+<span class="comment"><!-- Semantic tag for a quoted passage. CSS adds the lime green left border bar. --></span>
+
+&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"marquee"</span>&gt;
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"marquee-track"</span>&gt;
+    &lt;<span class="tag">span</span>&gt;Videography&lt;/<span class="tag">span</span>&gt; &lt;<span class="tag">span</span>&gt;/&lt;/<span class="tag">span</span>&gt;
+    &lt;<span class="tag">span</span>&gt;Videography&lt;/<span class="tag">span</span>&gt; &lt;<span class="tag">span</span>&gt;/&lt;/<span class="tag">span</span>&gt;
+    <span class="comment"><!-- The list is written TWICE on purpose.
+         CSS scrolls it left; when copy 1 exits, copy 2 is already there → seamless loop. --></span>
+  &lt;/<span class="tag">div</span>&gt;
+&lt;/<span class="tag">div</span>&gt;</pre>
+
+  <h3>gallery.html — the Work page</h3>
+  <pre>&lt;<span class="tag">section</span> <span class="attr">class</span>=<span class="val">"masonry"</span>&gt;
+
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"m-item tall fade-in"</span>&gt;
+    &lt;<span class="tag">img</span> <span class="attr">src</span>=<span class="val">"images/gallery-01-car.svg"</span> <span class="attr">alt</span>=<span class="val">"car shot 1"</span>&gt;
+    <span class="comment"><!-- TO REPLACE: change src= to your real photo path
+         e.g.  src="images/my-race-car.jpg" --></span>
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"m-tag"</span>&gt;cars&lt;/<span class="tag">span</span>&gt;
+    <span class="comment"><!-- The small pill label in the top-left corner of the image --></span>
+  &lt;/<span class="tag">div</span>&gt;
+
+&lt;/<span class="tag">section</span>&gt;</pre>
+
+  <h3>contact.html — the Contact page</h3>
+  <pre>&lt;<span class="tag">form</span> <span class="attr">id</span>=<span class="val">"contactForm"</span> <span class="attr">novalidate</span>&gt;
+
+  &lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"field"</span>&gt;
+    &lt;<span class="tag">label</span> <span class="attr">for</span>=<span class="val">"name"</span>&gt;Name&lt;/<span class="tag">label</span>&gt;
+    <span class="comment"><!-- The visible label above the text box --></span>
+    &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">id</span>=<span class="val">"name"</span> <span class="attr">placeholder</span>=<span class="val">"Your full name"</span>&gt;
+    <span class="comment"><!-- placeholder= is the grey hint text inside the box --></span>
+    &lt;<span class="tag">span</span> <span class="attr">class</span>=<span class="val">"err"</span> <span class="attr">id</span>=<span class="val">"errName"</span>&gt;&lt;/<span class="tag">span</span>&gt;
+    <span class="comment"><!-- Empty by default. JS fills it with an error message if needed. --></span>
+  &lt;/<span class="tag">div</span>&gt;
+
+  &lt;<span class="tag">textarea</span> <span class="attr">rows</span>=<span class="val">"5"</span> <span class="attr">placeholder</span>=<span class="val">"Type your message..."</span>&gt;&lt;/<span class="tag">textarea</span>&gt;
+  <span class="comment"><!-- Like an input but for multi-line messages. rows=5 sets the starting height. --></span>
+
+  &lt;<span class="tag">p</span> <span class="attr">class</span>=<span class="val">"success-msg"</span> <span class="attr">id</span>=<span class="val">"successMsg"</span>&gt;Thanks! Sent ✓&lt;/<span class="tag">p</span>&gt;
+  <span class="comment"><!-- Hidden by default. JS makes it appear after successful submission. --></span>
+
+&lt;/<span class="tag">form</span>&gt;</pre>
+
+
+  <!-- ====== CSS SECTION ====== -->
+  <div class="chapter">
+    <div class="chapter-label">File 2 of 6</div>
+    <h2>Understanding <span>CSS</span></h2>
+  </div>
+
+  <p class="section-intro">CSS rules follow a simple pattern: <em>who to target</em>, then <em>what to do to them</em>.</p>
+
+  <pre><span class="sel">.hero-name</span> {
+  <span class="prop">font-size</span>: 200px;
+  <span class="prop">color</span>: white;
+}
+<span class="comment">/* .hero-name = target anything with class="hero-name"
+   Everything inside {} is applied to it */</span></pre>
+
+  <h3>Color variables (lines 7–26)</h3>
+  <p>Instead of writing a color code like <code>#c8ff3e</code> everywhere, the site uses named variables. Change one line, and the color updates everywhere on the site.</p>
+  <pre><span class="sel">:root</span> {
+  <span class="prop">--bg</span>:      #0f0f10;   <span class="comment">/* main background — near black */</span>
+  <span class="prop">--ink</span>:     #f5f5f3;   <span class="comment">/* main text — near white */</span>
+  <span class="prop">--lime</span>:    #c8ff3e;   <span class="comment">/* accent color — bright lime green */</span>
+  <span class="prop">--muted</span>:   #a8a8a3;   <span class="comment">/* secondary text — grey */</span>
+}
+
+<span class="comment">/* When JS adds class="light" to the body,
+   these values override the dark ones above: */</span>
+<span class="sel">body.light</span> {
+  <span class="prop">--bg</span>:   #f4f4f1;   <span class="comment">/* now a light cream */</span>
+  <span class="prop">--ink</span>:  #0f0f10;   <span class="comment">/* now dark text */</span>
+}</pre>
+
+  <h3>The CSS Reset (lines 29–34)</h3>
+  <p>Browsers have their own default spacing. This removes all of it so you start from zero.</p>
+  <pre><span class="sel">*</span> {
+  <span class="prop">margin</span>: 0;
+  <span class="prop">padding</span>: 0;
+  <span class="prop">box-sizing</span>: border-box;
+  <span class="comment">/* * means "every single element on the page" */</span>
+}</pre>
+
+  <h3>The Navbar — floating pill (lines 60–76)</h3>
+  <pre><span class="sel">.navbar</span> {
+  <span class="prop">position</span>: fixed;          <span class="comment">/* stays on screen even when you scroll */</span>
+  <span class="prop">top</span>: 18px;
+  <span class="prop">left</span>: 50%;                 <span class="comment">/* move left edge to center */</span>
+  <span class="prop">transform</span>: translateX(-50%); <span class="comment">/* shift back left by half its width → perfectly centered */</span>
+  <span class="prop">border-radius</span>: 999px;     <span class="comment">/* a huge number = pill shape */</span>
+  <span class="prop">z-index</span>: 100;             <span class="comment">/* layer number — 100 keeps it always on top */</span>
+  <span class="prop">transition</span>: all 0.3s ease; <span class="comment">/* any change animates smoothly over 0.3 seconds */</span>
+}</pre>
+
+  <h3>Responsive font sizes (clamp)</h3>
+  <p>The big name on the hero scales automatically with screen size — never too big, never too small.</p>
+  <pre><span class="sel">.hero-name</span> {
+  <span class="prop">font-size</span>: clamp(64px, 14vw, 200px);
+  <span class="comment">/* clamp(minimum, preferred, maximum)
+     14vw = 14% of the viewport width
+     On a phone it might be 70px. On a huge monitor it might be 200px. --></span>
+}</pre>
+
+  <h3>mix-blend-mode: difference</h3>
+  <p>This is a CSS version of Photoshop's blending modes. The name text inverts against whatever is behind it — light where the background is dark, dark where the background is light. The name is always readable.</p>
+
+  <h3>Animations with @keyframes</h3>
+  <pre><span class="sel">@keyframes bounce</span> {
+  0%, 100% { <span class="prop">transform</span>: translateY(0);   }  <span class="comment">/* start and end: normal position */</span>
+      50%  { <span class="prop">transform</span>: translateY(8px); }  <span class="comment">/* midpoint: 8px lower */</span>
+}
+<span class="comment">/* Applied to the "scroll ↓" hint for a gentle looping bounce */</span></pre>
+
+  <h3>The marquee scrolling strip</h3>
+  <pre><span class="sel">@keyframes scroll</span> {
+  <span class="prop">from</span> { <span class="prop">transform</span>: translateX(0); }
+  <span class="prop">to</span>   { <span class="prop">transform</span>: translateX(-50%); }
+}
+<span class="comment">/* Slides the track left by exactly half its width.
+   Since the content is duplicated, it loops seamlessly. */</span></pre>
+
+  <h3>The masonry (Pinterest) gallery</h3>
+  <pre><span class="sel">.masonry</span> {
+  <span class="prop">column-count</span>: 3;   <span class="comment">/* split into 3 columns */</span>
+  <span class="prop">column-gap</span>: 16px;
+}
+<span class="sel">.m-item</span> {
+  <span class="prop">break-inside</span>: avoid; <span class="comment">/* never split one image across two columns */</span>
+}</pre>
+
+  <h3>Fade-in on scroll — two-state system</h3>
+  <pre><span class="sel">.fade-in</span> {
+  <span class="prop">opacity</span>: 0;                  <span class="comment">/* invisible by default */</span>
+  <span class="prop">transform</span>: translateY(24px); <span class="comment">/* shifted 24px down by default */</span>
+  <span class="prop">transition</span>: opacity 0.8s ease, transform 0.8s ease; <span class="comment">/* animate any change smoothly */</span>
+}
+<span class="sel">.fade-in.visible</span> {
+  <span class="prop">opacity</span>: 1;                  <span class="comment">/* fully visible */</span>
+  <span class="prop">transform</span>: translateY(0);   <span class="comment">/* back to normal position */</span>
+}
+<span class="comment">/* JavaScript adds class "visible" when element scrolls into view → CSS transition fires */</span></pre>
+
+  <h3>Mobile responsive rules</h3>
+  <pre><span class="sel">@media (max-width: 760px)</span> {
+  <span class="comment">/* Everything inside only applies on screens 760px wide or narrower */</span>
+  <span class="sel">.hamburger</span>    { <span class="prop">display</span>: flex; }   <span class="comment">/* show the hamburger button */</span>
+  <span class="sel">.about-grid</span>   { <span class="prop">grid-template-columns</span>: 1fr; }  <span class="comment">/* stack to 1 column */</span>
+  <span class="sel">.masonry</span>      { <span class="prop">column-count</span>: 2; }  <span class="comment">/* gallery drops from 3 to 2 columns */</span>
+  <span class="sel">.contact-grid</span> { <span class="prop">grid-template-columns</span>: 1fr; }
+}
+<span class="sel">@media (max-width: 460px)</span> {
+  <span class="sel">.masonry</span> { <span class="prop">column-count</span>: 1; }  <span class="comment">/* very small phones: single column */</span>
+}</pre>
+
+
+  <!-- ====== JS SECTION ====== -->
+  <div class="chapter">
+    <div class="chapter-label">File 3 of 6</div>
+    <h2>Understanding <span>JavaScript</span></h2>
+  </div>
+
+  <p class="section-intro">JavaScript reacts to things — clicks, scrolling, time — and changes the page in response. Unlike HTML and CSS which just describe how the page looks, JS <em>does things</em>.</p>
+
+  <div class="concept-box">
+    <strong>The core pattern</strong>
+    "Listen to this element. When something happens, run this code." That is almost everything JavaScript does on this site.
+  </div>
+
+  <h3>1 — Dark / Light mode toggle</h3>
+  <pre><span class="comment">// Find the button in the HTML by its id</span>
+const themeBtn = document.getElementById('themeBtn');
+
+<span class="comment">// When the page loads, check if the user previously chose light mode</span>
+if (localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light');
+}
+<span class="comment">// localStorage = a tiny storage area in the browser that remembers
+//               settings even after the tab is closed</span>
+
+<span class="comment">// When the button is clicked...</span>
+themeBtn.addEventListener('click', function() {
+  document.body.classList.toggle('light');
+  <span class="comment">// .toggle = if the class is missing, add it. If it's there, remove it.</span>
+
+  if (document.body.classList.contains('light')) {
+    localStorage.setItem('theme', 'light');  <span class="comment">// save the choice</span>
+  } else {
+    localStorage.setItem('theme', 'dark');
+  }
+});</pre>
+
+  <h3>2 — Hamburger menu (mobile)</h3>
+  <pre>hamburger.addEventListener('click', function() {
+  navLinks.classList.toggle('open');
+  <span class="comment">// CSS: .nav-links { display:none }  →  hidden
+  // CSS: .nav-links.open { display:flex } →  visible
+  // Toggling the class "open" switches between those two states</span>
+});
+
+<span class="comment">// Also close the menu when any nav link is clicked</span>
+for (let i = 0; i < links.length; i++) {
+  links[i].addEventListener('click', function() {
+    navLinks.classList.remove('open');
+  });
+}</pre>
+
+  <h3>3 — Fade-in on scroll</h3>
+  <pre><span class="comment">// IntersectionObserver watches whether elements are visible in the viewport</span>
+const observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {           <span class="comment">// "is this element on screen?"</span>
+      entry.target.classList.add('visible'); <span class="comment">// yes → add "visible" → CSS fades it in</span>
+    }
+  });
+}, { threshold: 0.15 });  <span class="comment">// trigger when 15% of the element is visible</span>
+
+fadeElements.forEach(function(el) {
+  observer.observe(el);  <span class="comment">// watch each fade-in element</span>
+});</pre>
+
+  <h3>4 — Contact form validation</h3>
+  <pre>form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  <span class="comment">// e.preventDefault() stops the browser's default behavior
+  // (which would reload the page). Our custom checks run instead.</span>
+
+  const name = document.getElementById('name').value.trim();
+  <span class="comment">// .value = what the user typed
+  // .trim() = remove accidental spaces at the start or end</span>
+
+  if (name.length < 2) {
+    document.getElementById('errName').textContent = 'please enter your name';
+    ok = false;
+    <span class="comment">// Fill the error span under the input. CSS colors it red.</span>
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) { ... }
+  <span class="comment">// A regex (pattern formula) that checks if the text looks like a valid email</span>
+
+  if (ok) {
+    document.getElementById('successMsg').classList.add('show');
+    form.reset();  <span class="comment">// clear all input fields</span>
+
+    setTimeout(function() {
+      document.getElementById('successMsg').classList.remove('show');
+    }, 4000);
+    <span class="comment">// setTimeout runs code after a delay. 4000 = 4000 milliseconds = 4 seconds.</span>
+  }
+});</pre>
+
+  <h3>5 — Navbar shrinks on scroll</h3>
+  <pre>window.addEventListener('scroll', function() {
+  if (window.scrollY > 30) {    <span class="comment">// scrolled more than 30px?</span>
+    navbar.style.top = '10px';  <span class="comment">// move navbar a bit closer to top edge</span>
+  } else {
+    navbar.style.top = '18px';  <span class="comment">// back to default position</span>
+  }
+  <span class="comment">// CSS transition: all 0.3s on the navbar makes this movement smooth</span>
+});</pre>
+
+
+  <!-- ====== HOW TO REPLACE PLACEHOLDERS ====== -->
+  <div class="replace-guide">
+    <h3>How to replace placeholder images with real photos</h3>
+    <ol>
+      <li>Export or save your real photo as a <code>.jpg</code> or <code>.png</code> file (e.g. <code>my-car.jpg</code>).</li>
+      <li>Copy that file into the <code>images/</code> folder inside the <code>Ataul Site</code> folder.</li>
+      <li>Open the relevant HTML file (e.g. <code>gallery.html</code>) in a text editor.</li>
+      <li>Find the line that says <code>src="images/gallery-01-car.svg"</code> and change it to <code>src="images/my-car.jpg"</code>. Do not change anything else on that line.</li>
+      <li>Save the file, go to your browser, and press <strong>F5</strong> to refresh.</li>
+      <li>For the profile photo on the About page, find <code>src="images/profile-photo.svg"</code> in <code>about.html</code> and replace it the same way.</li>
+    </ol>
+  </div>
+
+
+  <!-- ====== FOOTER ====== -->
+  <div class="ex-footer">
+    AA24 Portfolio · Site Documentation · Generated May 2026
+  </div>
+
+</div><!-- end .page-wrap -->
+</body>
+</html>
