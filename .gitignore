@@ -1,0 +1,6 @@
+node_modules/
+package.json
+package-lock.json
+convert-heic.js
+images/AA24/*.heic
+images/AA24/*.HEIC
