@@ -361,7 +361,7 @@ body.light .hero-bg {
    ================================================ */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
   gap: 40px;
   padding: 40px;
   max-width: 1200px;
@@ -376,6 +376,16 @@ body.light .hero-bg {
   aspect-ratio: 4 / 5;
   position: relative;
   overflow: hidden;
+  min-width: 0;
+}
+
+.profile-pic img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
 }
 .ph-label {
   position: absolute;
@@ -388,7 +398,11 @@ body.light .hero-bg {
   text-transform: uppercase;
 }
 
-.about-text { padding-top: 8px; }
+.about-text {
+  padding-top: 8px;
+  min-width: 0;
+  overflow: hidden;
+}
 
 .lead {
   font-size: 22px;
@@ -421,6 +435,7 @@ body.light .hero-bg {
 /* skills marquee */
 .marquee {
   margin: 18px 0 28px;
+  width: 100%;
   overflow: hidden;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
